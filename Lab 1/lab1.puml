@@ -1,0 +1,64 @@
+@startuml
+
+abstract class Vegetable {
+    calories: long
+}
+abstract class Herb
+class Celeny
+class Onion
+class Lettuce
+abstract class Veg
+class Potato
+class Tomato
+class Cucumber
+
+class Salad {
+    Ingredients: List<Vegetable>
+    getCalories: long
+}
+
+class SaladCooker {
+    create(Dict<VegetableType, long>): Salad
+}
+
+class VegetableFactory {
+    create(VegetableType): Vegetable
+}
+
+enum VegetableType {
+    Celery,
+    Onion,
+    Lettuce,
+    Potato,
+    Tomato,
+    Cucumber
+}
+
+Vegetable <|-- Herb
+Vegetable <|-- Veg
+
+Herb <|-- Celeny
+Herb <|-- Onion
+Herb <|-- Lettuce
+
+Veg <|-- Potato
+Veg <|-- Tomato
+Veg <|-- Cucumber
+
+Salad o-- Vegetable
+
+Salad <.. SaladCooker : creates
+
+SaladCooker <-- VegetableFactory
+SaladCooker <-- VegetableType
+VegetableFactory <-- VegetableType
+
+Celeny <.. VegetableFactory : creates
+Onion <.. VegetableFactory : creates
+Lettuce <.. VegetableFactory : creates
+
+Potato <.. VegetableFactory : creates
+Tomato <.. VegetableFactory : creates
+Cucumber <.. VegetableFactory : creates
+
+@enduml
